@@ -108,9 +108,11 @@ app.get('/', async (req, res) => {
     res.json({ message: "vocab-api is running now..." });
 });
 app.get('/api', async (req, res) => {
-    // Randomly select a question from the array
-    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-    res.json(randomQuestion);
+    // Shuffle the questions array to get a random order
+    const shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+    // Select the first 5 questions
+    const selectedQuestions = shuffledQuestions.slice(0, 5);
+    res.json(selectedQuestions);
 });
 
 const PORT = 3000;
